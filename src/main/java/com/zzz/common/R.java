@@ -13,7 +13,6 @@ import lombok.NoArgsConstructor;
  */
 
 @Data
-@NoArgsConstructor
 @Builder
 public class R<T> {
     int code;
@@ -32,46 +31,31 @@ public class R<T> {
     }
 
     // success
-    public R<T> success(){
-        this.code = 200;
-        this.msg = "success";
-        return new R<>(code,msg,null);
+    public static R success(){
+        return new R<>(200, "success", null);
     }
-    public R<T> success(T data){
-        this.code = 200;
-        this.msg = "success";
-        return new R<>(code,msg,data);
+    public static R success(Object data){
+        return new R<>(200, "success", data);
     }
-    public R<T> success(String msg, T data){
-        this.code = 200;
-        this.msg = msg;
-        this.data = data;
-        return new R<>(code,msg,data);
+    public static R success(String msg, Object data){
+        return new R<>(200, msg, data);
     }
 
     // error
-    public R<T> error(){
-        this.code = 500;
-        this.msg = "error";
-        return new R<>(code,msg,null);
+        public static R error(){
+        return new R<>(500, "error", null);
     }
 
-    public R<T> error(T data){
-        this.code = 500;
-        this.msg = "error";
-        return new R<>(code,msg,data);
+    public static R error(Object data){
+        return new R<>(500, "error", data);
     }
 
-    public R<T> error(int code, String msg){
-        this.code = code;
-        this.msg = msg;
-        return new R<>(code,msg,null);
+    public static R error(int code, String msg){
+        return new R<>(code, msg, null);
     }
 
-    public R<T> error(String msg, T data){
-        this.code = 500;
-        this.msg = msg;
-        this.data = data;
-        return new R<>(code,msg,data);
+    public static R error(String msg, Object data){
+
+        return new R<>(500,msg,data);
     }
 }

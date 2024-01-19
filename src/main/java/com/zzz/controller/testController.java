@@ -1,9 +1,11 @@
 package com.zzz.controller;
 
 import com.zzz.common.R;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.zzz.domain.User;
+import com.zzz.service.UserDetailsServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author digediao
@@ -16,8 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/")
 public class testController {
 
-    @PostMapping("/login")
-    public R login() {
-        return new R().success();
+    @GetMapping("/hello")
+    @PreAuthorize("hasAuthority('test')")
+    public R hello() {
+        return R.success("hello");
     }
 }

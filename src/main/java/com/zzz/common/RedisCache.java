@@ -1,4 +1,4 @@
-package com.zzz.config;
+package com.zzz.common;
 
 /**
  * @author digediao

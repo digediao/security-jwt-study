@@ -1,0 +1,8 @@
+spring:
+  profiles:
+    include:
+      - druid
+  redis:
+    host: localhost
+    port: 6379
+    password:
