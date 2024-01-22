@@ -24,12 +24,18 @@ import java.util.stream.Collectors;
 
 @Data
 @NoArgsConstructor
-@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonIgnoreProperties({"authorities", "password", "username", "accountNonExpired", "accountNonLocked", "credentialsNonExpired", "enabled"})
 public class LoginUser implements UserDetails {
     private User user;
     private List<String> permissions;
+
     @JSONField(serialize = false)
-    private List<GrantedAuthority> authorities;
+    private List<SimpleGrantedAuthority> authorities;
+
+    public LoginUser(User user, List<String> permissions) {
+        this.user = user;
+        this.permissions = permissions;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -68,10 +74,5 @@ public class LoginUser implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
-    }
-
-    public LoginUser(User user, List<String> permissions) {
-        this.user = user;
-        this.permissions = permissions;
     }
 }

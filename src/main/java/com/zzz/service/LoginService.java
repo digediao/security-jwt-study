@@ -53,10 +53,10 @@ public class LoginService {
         /*将用户信息返回authenticationToken并封装到SecurityContextHolder中供其他过滤器通过getContext().getAuthentication()获取用户信息*/
         LoginUser loginUser = (LoginUser) authenticate.getPrincipal();
         String userid = loginUser.getUser().getId().toString();
-        String jwt = JwtUtil.createJWT(userid, TimeUnit.SECONDS.toMillis(60));
+        String jwt = JwtUtil.createJWT(userid);
         Map<String,Object> map = new HashMap<>();
         map.put(Constant.authorize_token, jwt);
-        redisTemplate.opsForValue().set("userid:"+userid, loginUser);
+        redisTemplate.opsForValue().set("userid:"+userid, loginUser, 1, TimeUnit.HOURS);
 
         return R.success(map);
     }

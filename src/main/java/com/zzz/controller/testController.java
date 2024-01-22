@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 public class testController {
 
     @GetMapping("/hello")
-    @PreAuthorize("hasAuthority('test')")
+    @PreAuthorize("@se.hasAuthority('sys:dept:list')")
     public R hello() {
         return R.success("hello");
     }
